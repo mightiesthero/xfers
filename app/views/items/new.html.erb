@@ -1,0 +1,27 @@
+<%= render "layouts/nav" %>
+
+<%= form_tag("/items", method: "post") do %>
+  <%= hidden_field_tag "name", "Laptop 1", name: "name[]" %>
+  <%= hidden_field_tag "name", "Laptop 2", name: "name[]" %>
+  <%= hidden_field_tag "description", "Laptop 1", name: "description[]" %>
+  <%= hidden_field_tag "description", "Laptop 2", name: "description[]" %>
+  <%= hidden_field_tag "price", "1000000", name: "price[]" %>
+  <%= hidden_field_tag "price", "2000000", name: "price[]" %>
+
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>Laptop 1</td>
+        <td>1.000.000</td>
+        <td><%= number_field_tag "quantity", 0, name: "quantity[]" %></td>
+      </tr>
+
+      <tr>
+        <td>Laptop 2</td>
+        <td>2.000.000</td>
+        <td><%= number_field_tag "quantity", 0, name: "quantity[]" %></td>
+      </tr>
+    </tbody>
+  </table>
+  <%= submit_tag "Buy" %>
+<% end %>

@@ -1,1 +1,26 @@
-asda
+<%= render "layouts/nav" %>
+
+<div class="row">
+  <div class="col">
+    <%= "#{@user["display_name"]}" %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    Balance
+  </div>
+  <div class="col">
+    <%= "#{@user["available_balance"]}" %>
+  </div>
+</div>
+
+Transfers
+<table>
+  <% @transfers["transfer_info_array"].each do |transfer| %>
+  <tr>
+    <td>bank</td>
+    <td><%= "#{transfer["bank_name_full"]}" %></td>
+  </tr>
+  <% end %>
+</table>
