@@ -1,26 +1,32 @@
-<%= render "layouts/nav" %>
+<center>
+  <div class="row">
+    <div class="col-4">
+      <%= link_to "My Shop", new_item_path %>
+    </div>
 
-<div class="row">
-  <div class="col">
-    <%= "#{@user["display_name"]}" %>
-  </div>
-</div>
+    <div class="col-4">
+      <strong>
+        Welcome <%= "#{@user["display_name"]}" %> !
+      </strong>
+    </div>
 
-<div class="row">
-  <div class="col">
-    Balance
+    <div class="col-4">
+      Balance: Rp. <%= "#{@user["available_balance"]}" %>
+    </div>
   </div>
-  <div class="col">
-    <%= "#{@user["available_balance"]}" %>
-  </div>
-</div>
 
-Transfers
-<table>
+  <p>You have successfully created your wallet</p>
+
+  <p>You can top up your wallet by transfering to the following bank</p>
+
   <% @transfers["transfer_info_array"].each do |transfer| %>
-  <tr>
-    <td>bank</td>
-    <td><%= "#{transfer["bank_name_full"]}" %></td>
-  </tr>
+    <strong>Bank Name: </strong>
+    <%= "#{transfer["bank_name_full"]}" %>
+    <br/>
+    <strong>Account number</strong>
+    <%= "#{transfer["bank_account_no"]}" %>
+    <br/>
+    <strong>Unique id</strong>
+    <%= "#{transfer["unique_id"]}" %>
   <% end %>
-</table>
+</center>

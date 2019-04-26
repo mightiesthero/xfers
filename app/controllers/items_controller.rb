@@ -1,5 +1,8 @@
 class ItemsController < ApplicationController
+  include ApplicationHelper
+
   def new
+    @user = get_user
   end
 
   def create
@@ -10,14 +13,11 @@ class ItemsController < ApplicationController
     return_link = "#{my_host}"
     cancel_link = "#{my_host}"
     address = "https://sandbox-id.xfers.com/api/v3/charges"
-    headers = {
-      "X-XFERS-APP-API-KEY" => "3dehFLadwsxNUWe_sSp5ymBaQJB8yLzPyM1sRgkTDPk",
-      "X-XFERS-APP-API-SECRET" => "rGZUQrjtqUzRqwsSNk9G5z8yRxmYxguZzxkrNwJze1k",
-      "Content-Type" => "application/json"
-    }
+    headers = api_header
+    headers["Content-Type"] = "application/json"
     body = {
-      "amount" => amount,
       "currency" => "IDR",
+      "amount" => amount,
       "notify_url" => notify_link,
       "return_url" => return_link,
       "cancel_url" => cancel_link,

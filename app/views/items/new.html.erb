@@ -1,27 +1,41 @@
-<%= render "layouts/nav" %>
+<center>
 
-<%= form_tag("/items", method: "post") do %>
-  <%= hidden_field_tag "name", "Laptop 1", name: "name[]" %>
-  <%= hidden_field_tag "name", "Laptop 2", name: "name[]" %>
-  <%= hidden_field_tag "description", "Laptop 1", name: "description[]" %>
-  <%= hidden_field_tag "description", "Laptop 2", name: "description[]" %>
-  <%= hidden_field_tag "price", "1000000", name: "price[]" %>
-  <%= hidden_field_tag "price", "2000000", name: "price[]" %>
+  <div class="row">
+    <div class="col-4">
+      <%= link_to "My Shop", new_item_path %>
+    </div>
 
-  <table class="table">
-    <tbody>
-      <tr>
-        <td>Laptop 1</td>
-        <td>1.000.000</td>
-        <td><%= number_field_tag "quantity", 0, name: "quantity[]" %></td>
-      </tr>
+    <div class="col-4">
+      <strong>Shop</strong>
+    </div>
 
-      <tr>
-        <td>Laptop 2</td>
-        <td>2.000.000</td>
-        <td><%= number_field_tag "quantity", 0, name: "quantity[]" %></td>
-      </tr>
-    </tbody>
-  </table>
-  <%= submit_tag "Buy" %>
-<% end %>
+    <div class="col-4">
+      Balance: Rp. <%= "#{@user["available_balance"]}" %>
+    </div>
+  </div>
+
+  <%= form_tag("/items", method: "post") do %>
+    <%= hidden_field_tag "name", "Laptop 1", name: "name[]" %>
+    <%= hidden_field_tag "name", "Laptop 2", name: "name[]" %>
+    <%= hidden_field_tag "description", "Laptop 1", name: "description[]" %>
+    <%= hidden_field_tag "description", "Laptop 2", name: "description[]" %>
+    <%= hidden_field_tag "price", "1000000", name: "price[]" %>
+    <%= hidden_field_tag "price", "2000000", name: "price[]" %>
+
+    <div class="row">
+      <div class="col-6">
+        <p><strong>Laptop 1</strong></p>
+        <p>1.000.000</p>
+        <p><%= number_field_tag "quantity", 1, name: "quantity[]" %></p>
+      </div>
+
+      <div class="col-6">
+        <p><strong>Laptop 2</strong></p>
+        <p>2.000.000</p>
+        <p><%= number_field_tag "quantity", 1, name: "quantity[]" %></p>
+      </div>
+    </div>
+
+    <%= submit_tag "Buy" %>
+  <% end %>
+<center>
