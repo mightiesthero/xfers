@@ -6,6 +6,9 @@ class ItemsController < ApplicationController
     amount = count_amount
     items = build_items
     order_id = DateTime.now.strftime("%Y%m%d%H%M%S")
+    notify_link = "#{my_host}"
+    return_link = "#{my_host}"
+    cancel_link = "#{my_host}"
     address = "https://sandbox-id.xfers.com/api/v3/charges"
     headers = {
       "X-XFERS-APP-API-KEY" => "3dehFLadwsxNUWe_sSp5ymBaQJB8yLzPyM1sRgkTDPk",
@@ -15,9 +18,9 @@ class ItemsController < ApplicationController
     body = {
       "amount" => amount,
       "currency" => "IDR",
-      "notify_url" => "https: //mysite.com/payment_notification",
-	    "return_url" => "https: //mysite.com/return",
-	    "cancel_url" => "https: //mysite.com/cancel",
+      "notify_url" => notify_link,
+      "return_url" => return_link,
+      "cancel_url" => cancel_link,
       "order_id" => order_id,
       "redirect" => false,
       "description" => "unusedreddress",
@@ -31,9 +34,10 @@ class ItemsController < ApplicationController
       },
       "debit_only" => true
     }
-    # result = HTTParty.post(address, body: body.to_json, headers: headers)
+    result = HTTParty.post(address, body: body.to_json, headers: headers)
+    transaction = JSON.parse result.body
 
-    redirect_to new_item_path
+    redirect_to transaction["checkout_url"]
   end
 
   def count_amount
@@ -59,5 +63,9 @@ class ItemsController < ApplicationController
       end
     end
     items
+  end
+
+  def my_host
+    "#{request.protocol}#{request.host_with_port}"
   end
 end
